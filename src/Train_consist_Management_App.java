@@ -18,31 +18,28 @@ class Bogie {
 public class Train_consist_Management_App {
     public static void main(String[] args) {
 
-        System.out.println("=== UC8 - Filter Passenger Bogies Using Streams ===\n");
+        System.out.println("=== UC10 - Total Seating Capacity Using reduce() ===\n");
 
-        // Step 1: Create list of bogies
+        // Step 1: Create list
         List<Bogie> bogies = new ArrayList<>();
 
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 56));
         bogies.add(new Bogie("First Class", 24));
-        bogies.add(new Bogie("General", 120)); // general bogie
+        bogies.add(new Bogie("General", 120));
 
-        // Step 2: Display original list
-        System.out.println("All Bogies:\n");
+        // Step 2: Display bogies
+        System.out.println("Train Bogies:\n");
         for (Bogie b : bogies) {
             System.out.println(b);
         }
 
-        // Step 3: Apply Stream Filtering (capacity > 60)
-        List<Bogie> filteredBogies = bogies.stream()
-                .filter(b -> b.capacity > 60)
-                .collect(Collectors.toList());
+        // Step 3: Calculate total using reduce
+        int totalSeats = bogies.stream()
+                .map(b -> b.capacity)
+                .reduce(0, Integer::sum);
 
-        // Step 4: Display filtered list
-        System.out.println("\nFiltered Bogies (Capacity > 60):\n");
-        for (Bogie b : filteredBogies) {
-            System.out.println(b);
-        }
+        // Step 4: Display total
+        System.out.println("\nTotal Seating Capacity: " + totalSeats);
     }
 }
